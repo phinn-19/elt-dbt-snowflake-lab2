@@ -1,0 +1,17 @@
+
+{{ config(materialized='view') }}
+
+SELECT
+    PRODUCTID,
+    PRODUCTNAME,
+    CATEGORY,
+    SUBCATEGORY,
+    SUM(ORDERPROFIT) AS PROFIT
+
+FROM {{ ref('stg_orders') }}
+
+GROUP BY
+    PRODUCTID,
+    PRODUCTNAME,
+    CATEGORY,
+    SUBCATEGORY
